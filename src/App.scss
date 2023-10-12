@@ -1,0 +1,103 @@
+    @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+   .headtitle{
+    font-family: 'Lobster', cursive; 
+  
+  }
+$themes: (
+  primary: (
+    // background: linear-gradient(to right, #e4afcb 0%, #b8cbb8 0%, #b8cbb8 0%, #e2c58b 30%, #c2ce9c 64%, #7edbdc 100%),
+    boxShadow: 0px 5px 20px rgb(63, 60, 60),
+    textColor: #000,
+    fontFamily: 'Lobster, cursive',
+  ),
+  secondary: (
+    background: linear-gradient(to right, #ffdb58, #ffac34) ,
+      boxShadow: 0px 5px 20px rgba(255, 172, 52, 0.5),
+    textColor: #333,
+    fontFamily: 'Arial, sans-serif',
+  ),
+);
+
+@mixin apply-theme($theme) {
+  $theme-styles: map-get($themes, $theme);
+
+  background: map-get($theme-styles, background);
+  box-shadow: map-get($theme-styles, boxShadow);
+  color: map-get($theme-styles, textColor);
+  font-family: map-get($theme-styles, fontFamily);
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  min-width: 40%;
+
+  @each $theme-name, $theme-styles in $themes {
+    &.#{$theme-name} {
+      @include apply-theme($theme-name);
+    }
+  }
+
+  .search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+
+    input {
+      width: 100%;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      margin-right: 10px;
+      font-size: 16px;
+      background-color: #f0f0f0;
+    }
+
+    button {
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #0055aa;
+      }
+    }
+  }
+
+  .recipes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+
+    .recipe {
+      border-radius: 10px;
+      box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      min-width: 40%;
+      font-family: 'Lobster, cursive';
+      color: pink;
+
+      .image {
+        border-radius: 10px;
+        margin: 0 0 20px 0;
+      }
+    }
+  }
+}
